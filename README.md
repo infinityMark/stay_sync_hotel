@@ -1,0 +1,1 @@
+# stay_sync_hotel

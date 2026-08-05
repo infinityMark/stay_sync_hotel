@@ -1,0 +1,41 @@
+# dependency file
+node_modules/
+dist/
+build/
+**/dist/
+**/build/
+
+# IMPORTANT FILES
+package-lock.json
+**/package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# ENV FILES
+.env
+.env.*
+*.env
+
+logs/
+*.log
+
+**/prisma/generated/
+
+**/*.png
+**/*.jpg
+**/*.jpeg
+**/*.gif
+**/*.svg
+**/*.ico
+**/*.woff
+**/*.woff2
+**/*.ttf
+**/*.eot
+
+.prettierrc
+.prettierignore
+.gitignore
+
+# operation garbage
+.DS_Store
+Thumbs.db

@@ -25,7 +25,7 @@ yarn-error.log*
 # operation system files
 .DS_Store
 Thumbs.db
-desktop.int
+desktop.ini
 
 # IDE configuration
 .vscode/

@@ -25,3 +25,13 @@ Hotel_System/
 └── frontend/ # React + Vite application
 ```
 This separation keeps backend and frontend code clean and independently deployable.
+
+### Frontend Structure
+```
+src/
+├── layouts/       (Header + Sidebar wrapper)
+├── pages/         (Dashboard, Rooms, Bookings, Reports)
+├── components/    (Reusable UI parts)
+├── stores/        (Zustand state - like Pinia)
+└── api/           (Axios requests)
+```

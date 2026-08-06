@@ -1,10 +1,9 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import './index.css';
-import NavBarInit from './layouts/ClientLayout';
+import Home from './pages/client/home';
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
-        <NavBarInit />
+        <Home />
     </StrictMode>
 );

@@ -11,6 +11,7 @@ export interface NavbarProps {
     logo: {
         src: string;
         alt: string;
+        href: string;
     };
     links: NavLinkItem[];
     languageLabel?: string;

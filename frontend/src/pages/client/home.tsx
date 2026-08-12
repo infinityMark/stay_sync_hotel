@@ -1,7 +1,14 @@
-import NavBarInit from '../../layouts/ClientLayout';
+import NavBarInit from '../../layouts/ClientHeader';
+import FooterInit from '../../layouts/ClientFooter';
 
 const Home = () => {
-    return <NavBarInit />;
+    return (
+        <div>
+            <NavBarInit />
+
+            <FooterInit />
+        </div>
+    );
 };
 
 export default Home;

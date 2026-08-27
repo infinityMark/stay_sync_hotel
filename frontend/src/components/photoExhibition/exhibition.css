@@ -1,0 +1,398 @@
+/* ═══════════════════════════════════════════
+   HeroCarousel — monochrome editorial hero
+   Matches the library's Navbar/Footer system.
+   Signature: the dot status bar — the active dot
+   stretches into a pill that fills with autoplay
+   progress, paired with a "01 / 04" counter.
+   ═══════════════════════════════════════════ */
+
+.hero-carousel,
+.hero-carousel * {
+    box-sizing: border-box;
+}
+
+.hero-carousel {
+    --hero-sans:
+        -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --hero-serif: Georgia, 'Times New Roman', Times, serif;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: #111111;
+    color: #ffffff;
+}
+
+/* ── Frame ── */
+.hero-carousel__frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: var(--hero-aspect, 16 / 9);
+    max-height: 92vh;
+    max-height: 92svh;
+    overflow: hidden;
+    touch-action: pan-y;
+}
+
+/* ── Slides (every image fills the same frame → identical ratio) ── */
+.hero-carousel__slide {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.hero-carousel__slide--active {
+    opacity: 1;
+}
+
+.hero-carousel__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    user-select: none;
+}
+
+.hero-carousel__slide--active .hero-carousel__image {
+    animation: hero-kenburns var(--hero-interval, 6000ms) linear forwards;
+}
+
+@keyframes hero-kenburns {
+    from {
+        transform: scale(1.02);
+    }
+    to {
+        transform: scale(1.06);
+    }
+}
+
+/* ── Scrim (legibility over any photo) ── */
+.hero-carousel__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.42) 0%,
+        rgba(0, 0, 0, 0) 26%,
+        rgba(0, 0, 0, 0) 54%,
+        rgba(0, 0, 0, 0.66) 100%
+    );
+    pointer-events: none;
+}
+
+/* ── Text layer ── */
+.hero-carousel__content {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    max-width: 780px;
+    /* `left: 0; bottom: 0` is what pins the eyebrow + title + description block
+     to the frame's lower-left corner on every screen size — the placement is
+     structural, not dependent on a breakpoint. Safe-area insets then keep the
+     text clear of notches and the home indicator on phones. */
+    padding: 0 clamp(24px, 6vw, 96px) clamp(96px, 13vw, 150px);
+    padding-left: max(clamp(24px, 6vw, 96px), env(safe-area-inset-left, 0px));
+    padding-right: max(clamp(24px, 6vw, 96px), env(safe-area-inset-right, 0px));
+    padding-bottom: max(clamp(96px, 13vw, 150px), env(safe-area-inset-bottom, 0px));
+    pointer-events: none;
+    animation: hero-text-in 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes hero-text-in {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.hero-carousel__eyebrow {
+    margin: 0;
+    font-family: var(--hero-sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.hero-carousel__eyebrow::before {
+    content: '';
+    display: block;
+    width: 44px;
+    height: 1px;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.65);
+}
+
+.hero-carousel__title {
+    margin: 18px 0 0;
+    font-family: var(--hero-serif);
+    font-size: clamp(2.1rem, 5.2vw, 4rem);
+    font-weight: 500;
+    line-height: 1.06;
+    letter-spacing: -0.015em;
+    color: #ffffff;
+    max-width: 18ch;
+}
+
+.hero-carousel__description {
+    margin: 18px 0 0;
+    font-family: var(--hero-sans);
+    font-size: clamp(14px, 1.4vw, 16px);
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 48ch;
+}
+
+/* ── Status dots ── */
+.hero-carousel__dots {
+    position: absolute;
+    left: 50%;
+    bottom: calc(clamp(24px, 4vw, 48px) + env(safe-area-inset-bottom, 0px));
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.hero-carousel__dot {
+    appearance: none;
+    border: none;
+    background: none;
+    margin: 0;
+    padding: 12px 5px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.hero-carousel__dot-pill {
+    position: relative;
+    display: block;
+    height: 6px;
+    width: 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.4);
+    overflow: hidden;
+    transition:
+        width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+        background 0.35s;
+}
+
+.hero-carousel__dot--active .hero-carousel__dot-pill {
+    width: 26px;
+    background: rgba(255, 255, 255, 0.28);
+}
+
+/* Solid white when autoplay is off (nothing to show progress for). */
+.hero-carousel--static .hero-carousel__dot--active .hero-carousel__dot-pill {
+    background: #ffffff;
+}
+
+.hero-carousel__dot-fill {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: #ffffff;
+    transform: scaleX(0);
+    transform-origin: left center;
+    animation-name: hero-fill;
+    animation-duration: var(--hero-interval, 6000ms);
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes hero-fill {
+    to {
+        transform: scaleX(1);
+    }
+}
+
+/* Pause the progress fill while hovered or focused. */
+.hero-carousel:hover .hero-carousel__dot-fill,
+.hero-carousel:focus-within .hero-carousel__dot-fill {
+    animation-play-state: paused;
+}
+
+/* ── Index counter ── */
+.hero-carousel__counter {
+    position: absolute;
+    right: max(clamp(20px, 5vw, 64px), env(safe-area-inset-right, 0px));
+    bottom: calc(clamp(28px, 4vw, 52px) + env(safe-area-inset-bottom, 0px));
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    font-family: var(--hero-sans);
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    font-variant-numeric: tabular-nums;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.hero-carousel__counter-current {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.hero-carousel__counter-divider {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* ── Arrows ── */
+.hero-carousel__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(0, 0, 0, 0.25);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.hero-carousel__arrow:hover {
+    background: rgba(0, 0, 0, 0.55);
+    border-color: rgba(255, 255, 255, 0.7);
+}
+
+.hero-carousel__arrow svg {
+    width: 20px;
+    height: 20px;
+}
+
+.hero-carousel__arrow--prev {
+    left: clamp(12px, 3vw, 32px);
+}
+
+.hero-carousel__arrow--next {
+    right: clamp(12px, 3vw, 32px);
+}
+
+/* ── Focus & reduced motion ── */
+.hero-carousel__dot:focus-visible,
+.hero-carousel__arrow:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-carousel__image,
+    .hero-carousel__content,
+    .hero-carousel__slide,
+    .hero-carousel__dot-pill,
+    .hero-carousel__dot-fill {
+        animation: none !important;
+        transition: none !important;
+    }
+    .hero-carousel__dot--active .hero-carousel__dot-pill {
+        background: #ffffff;
+    }
+}
+
+/* ═══════════════════════════════════════════
+   Responsive — Tablet (≤ 1023px)
+   ═══════════════════════════════════════════ */
+
+@media (max-width: 1023px) {
+    .hero-carousel__title {
+        font-size: clamp(1.8rem, 4.6vw, 3rem);
+    }
+    .hero-carousel__content {
+        padding-bottom: max(clamp(88px, 12vw, 120px), env(safe-area-inset-bottom, 0px));
+    }
+}
+
+/* ═══════════════════════════════════════════
+   Responsive — Phone (< 768px)
+   ═══════════════════════════════════════════ */
+
+@media (max-width: 767px) {
+    .hero-carousel__frame {
+        aspect-ratio: var(--hero-aspect, 4 / 5);
+    }
+
+    .hero-carousel__arrow,
+    .hero-carousel__counter {
+        display: none;
+    }
+
+    .hero-carousel__content {
+        max-width: none;
+        padding: 0 20px 88px;
+        padding-left: max(20px, env(safe-area-inset-left, 0px));
+        padding-right: max(20px, env(safe-area-inset-right, 0px));
+        padding-bottom: max(88px, calc(env(safe-area-inset-bottom, 0px) + 56px));
+    }
+
+    .hero-carousel__title {
+        font-size: clamp(1.9rem, 8.5vw, 2.6rem);
+    }
+
+    .hero-carousel__description {
+        font-size: 14px;
+    }
+
+    .hero-carousel__eyebrow {
+        font-size: 11px;
+        letter-spacing: 0.24em;
+    }
+
+    .hero-carousel__dots {
+        bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    }
+}
+
+/* ═══════════════════════════════════════════
+   Responsive — Short viewports (landscape phones,
+   short browser windows). The frame is height-capped
+   by 92svh, so on a short screen there is less room;
+   compress spacing and type so the bottom-left text
+   still fits inside the frame and is never clipped.
+   ═══════════════════════════════════════════ */
+
+@media (max-height: 600px) {
+    .hero-carousel__content {
+        padding-top: 8px;
+        padding-bottom: max(clamp(64px, 16vh, 88px), env(safe-area-inset-bottom, 0px));
+    }
+
+    .hero-carousel__eyebrow::before {
+        margin-bottom: 12px;
+    }
+
+    .hero-carousel__title {
+        margin-top: 12px;
+        font-size: clamp(1.25rem, 5vh, 2.5rem);
+    }
+
+    .hero-carousel__description {
+        margin-top: 8px;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .hero-carousel__dots {
+        bottom: calc(clamp(16px, 4vh, 24px) + env(safe-area-inset-bottom, 0px));
+    }
+
+    .hero-carousel__counter {
+        bottom: calc(clamp(16px, 4vh, 24px) + env(safe-area-inset-bottom, 0px));
+    }
+}

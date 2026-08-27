@@ -1,0 +1,36 @@
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* 加上这一行，防止垂直拉伸变形 */
+    width: 100%; /* 确保容器占满整行 */
+}
+
+.img {
+    width: 95%; /* 手机优先（默认） */
+    max-width: 600px; /* 防止在超大屏上太宽，可根据喜好调整 */
+    height: auto; /* 保持原始宽高比，不变形 */
+}
+
+/* 平板（宽度 >= 768px） */
+@media (min-width: 768px) {
+    .img {
+        width: 80%; /* 平板上收窄一点，留出呼吸空间 */
+        max-width: 700px;
+    }
+}
+
+/* PC 桌面（宽度 >= 1024px） */
+@media (min-width: 1024px) {
+    .img {
+        width: 100%; /* 桌面端更收窄，配合两侧留白 */
+        max-width: 1500px;
+    }
+}
+
+/* 超大屏 2K/4K（宽度 >= 1400px） */
+@media (min-width: 1400px) {
+    .img {
+        width: 60%;
+        max-width: 1100px;
+    }
+}

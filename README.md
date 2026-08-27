@@ -35,3 +35,52 @@ src/
 ├── stores/        (Zustand state - like Pinia)
 └── api/           (Axios requests)
 ```
+
+### Backend Structure
+```
+backend/
+├── src/                          # Core: All application source code
+│   ├── config/                   # Configuration management (env vars, third-party keys, DB connection)
+│   │   └── index.js              # Unified export of config object
+│   │
+│   ├── controllers/              # Controller layer (handles requests and responses)
+│   │   ├── userController.js     # User module controller
+│   │   └── productController.js  # Product module controller
+│   │
+│   ├── middlewares/              # Middleware layer (global/local reusable logic)
+│   │   ├── auth.js               # JWT authentication
+│   │   ├── errorHandler.js       # Global error handling
+│   │   └── upload.js             # File upload parsing
+│   │
+│   ├── routes/                   # Route layer (defines API endpoints, mounts middleware)
+│   │   ├── userRoutes.js         # User routes (/api/users)
+│   │   └── index.js              # Route aggregation entry point
+│   │
+│   ├── services/                 # Service layer (core business logic, transactions)
+│   │   ├── userService.js        # User registration, login, password change, etc.
+│   │   └── productService.js
+│   │
+│   ├── utils/                    # Utility functions (pure functions, no side effects)
+│   │   ├── response.js           # Unified response format (success, error)
+│   │   ├── encrypt.js            # Password encryption/decryption
+│   │   └── validator.js          # Custom input validation
+│   │
+│   ├── app.js                    # Express instance config (registers middleware, routes, DB connection)
+│   └── server.js                 # Process entry point (starts HTTP server, listens on port)
+│
+├── prisma/                       # ORM configuration and database migrations (Prisma official standard)
+│   ├── schema.prisma             # Data model definitions (Models)
+│   └── migrations/               # Database schema change history (auto-generated)
+│       └── 20250101_init/
+│
+├── tests/                        # Test directory (ensures code quality)
+│   ├── unit/                     # Unit tests (testing Utils, Services)
+│   └── integration/              # Integration tests (testing API endpoints, connected to test DB)
+│
+├── .env.example                  # Environment variable template (commit to Git for team reference)
+├── .env                          # Actual environment variables (local/prod, MUST be in .gitignore)
+├── .gitignore                    # Git ignore file
+├── package.json                  # Project dependencies and script commands
+├── package-lock.json / yarn.lock # Dependency lock file
+└── README.md                     # Project documentation (architecture, startup commands, API docs)
+```

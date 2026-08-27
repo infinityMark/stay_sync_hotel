@@ -1,44 +1,33 @@
 {
-  // Visit https://aka.ms/tsconfig to read more about this file
-  "compilerOptions": {
-    // File Layout
-    // "rootDir": "./src",
-    // "outDir": "./dist",
+    "compilerOptions": {
+        /* 基础目录设置 */
+        "rootDir": "./src", // 源码都在 src 下
+        "outDir": "./dist", // 编译后输出到 dist 目录
 
-    // Environment Settings
-    // See also https://aka.ms/tsconfig/module
-    "module": "nodenext",
-    "target": "esnext",
-    "types": [],
-    // For nodejs:
-    // "lib": ["esnext"],
-    // "types": ["node"],
-    // and npm install -D @types/node
+        /* 环境与模块设置 (采用 CommonJS, 完美适配 Node.js) */
+        "module": "commonjs", // Node.js 默认识别 CommonJS，TS 编译后直接能跑
+        "target": "ES2022", // 使用现代 JS 特性
+        "lib": ["ES2022"], // 包含 ES2022 类型定义
+        "types": ["node"], // 【关键修复】必须写 node，否则 process 报红
+        "esModuleInterop": true, // 允许 import 引入 CommonJS 模块
+        "allowSyntheticDefaultImports": true,
 
-    // Other Outputs
-    "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
+        /* 编译输出增强 */
+        "sourceMap": true, // 方便调试
+        "declaration": true, // 生成 .d.ts 类型声明文件（可选）
+        "declarationMap": true,
 
-    // Stricter Typechecking Options
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
+        /* 严格检查 (保持你的高标准) */
+        "strict": true,
+        "noUncheckedIndexedAccess": true,
+        "exactOptionalPropertyTypes": true,
 
-    // Style Options
-    // "noImplicitReturns": true,
-    // "noImplicitOverride": true,
-    // "noUnusedLocals": true,
-    // "noUnusedParameters": true,
-    // "noFallthroughCasesInSwitch": true,
-    // "noPropertyAccessFromIndexSignature": true,
-
-    // Recommended Options
-    "strict": true,
-    "jsx": "react-jsx",
-    "verbatimModuleSyntax": true,
-    "isolatedModules": true,
-    "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force",
-    "skipLibCheck": true,
-  }
+        /* 关键开关：关闭严格语法转换（让你舒服写 import/export） */
+        "verbatimModuleSyntax": false, // 设为 false，TS 会把 import 转成 require
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "moduleDetection": "force"
+    },
+    "include": ["src/**/*.ts"], // 只处理 src 下的 TS 文件
+    "exclude": ["node_modules", "dist"] // 排除依赖和编译产物
 }

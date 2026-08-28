@@ -8,7 +8,7 @@
         "module": "commonjs", // Node.js 默认识别 CommonJS，TS 编译后直接能跑
         "target": "ES2022", // 使用现代 JS 特性
         "lib": ["ES2022"], // 包含 ES2022 类型定义
-        "types": ["node"], // 【关键修复】必须写 node，否则 process 报红
+        // "types": ["node"], // 【关键修复】必须写 node，否则 process 报红
         "esModuleInterop": true, // 允许 import 引入 CommonJS 模块
         "allowSyntheticDefaultImports": true,
 

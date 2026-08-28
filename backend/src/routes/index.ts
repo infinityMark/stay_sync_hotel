@@ -1,5 +1,7 @@
 // src/routes/index.ts
+// module import
 import { Router } from 'express';
+
 const router = Router();
 
 router.get('/', (req, res) => {

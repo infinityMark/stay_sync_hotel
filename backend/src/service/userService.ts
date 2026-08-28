@@ -7,6 +7,8 @@ export const registerUser = async (email: string, password: string) => {
 };
 
 export const verifyUser = async (email: string, password: string) => {
-    const storedPwd = '0'; //retrive pwd from DB
-    const isPassed = await comparePassword(storedPwd, password);
+    try {
+        const storedPwd = '0'; //retrive pwd from DB
+        const isPassed = await comparePassword(storedPwd, password);
+    } catch (error) {}
 };

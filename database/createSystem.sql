@@ -1,5 +1,5 @@
-CREATE DATABASE hotel_management;
-\c hotel_management;
+CREATE DATABASE hotel;
+\c hotel;
 
 CREATE TABLE consumer(
     consumerID SERIAL PRIMARY KEY,  -- SERIAL: valid range 1 to 2,147,483,647
@@ -108,7 +108,7 @@ CREATE TABLE reservation_service (
     
     consumerID INTEGER NOT NULL REFERENCES consumer(consumerID) ON DELETE CASCADE,
     
-    reservationID INTEGER REFERENCES reservation(reserID) ON DELETE CASCADE,
+    reservationID INTEGER REFERENCES reservation(reservationID) ON DELETE CASCADE,
     
     serviceID INTEGER NOT NULL REFERENCES service(serviceID),
     

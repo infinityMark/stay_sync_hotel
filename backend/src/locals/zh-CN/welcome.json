@@ -1,0 +1,8 @@
+{
+    "subject": "欢迎注册成功",
+    "greeting": "你好，{{username}}！",
+    "paragraph1": "感谢您的加入。我们非常高兴您能成为我们的一份子。为了开始使用并确保您的账户安全，请在下方验证您的电子邮件地址。",
+    "activationLink": "google.com",
+    "button": "立即激活",
+    "footer_disclaimer": "如果您未注册，请忽略此邮件。"
+}

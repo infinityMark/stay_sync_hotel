@@ -1,0 +1,8 @@
+{
+    "subject": "Welcome to successful registration",
+    "greeting": "Hello, {{username}}!",
+    "paragraph1": "Thank you for joining us. We are very happy that you are a part of our community. To get started and ensure your account security, please verify your email address below.",
+    "activationLink": "google.com",
+    "button": "Activate Now",
+    "footer_disclaimer": "If you are not registered, please ignore this email."
+}

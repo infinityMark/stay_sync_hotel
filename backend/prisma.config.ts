@@ -1,5 +1,6 @@
 // backend/prisma.config.ts
-/// <reference types="node" />
+// / <reference types="node" />
+import 'dotenv/config';
 
 export default {
     datasource: {

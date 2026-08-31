@@ -1,0 +1,6 @@
+{
+    "subject": "Account Verification",
+    "greeting": "Hello, {{username}}!",
+    "paragraph 1": "You are verifying your account. Please use the verification code below to complete the process. To ensure your account security, the verification code will be valid for <strong>10 minutes</strong>.",
+    "footer_disclaimer": "If this was not your action, please ignore this email; your account will not be affected."
+}

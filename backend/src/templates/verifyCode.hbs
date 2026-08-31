@@ -28,7 +28,7 @@
                             <td style='padding: 40px 40px 20px 40px; text-align: left;'>
                                 <h1
                                     style='margin: 0; font-size: 24px; font-weight: 600; color: #111827; letter-spacing: -0.5px;'
-                                >你好，{{username}}！</h1>
+                                >{{t 'greeting' username=username}}</h1>
                             </td>
                         </tr>
                         <!-- Body Content -->
@@ -36,10 +36,7 @@
                             <td
                                 style='padding: 0 40px 30px 40px; color: #4b5563; font-size: 16px; line-height: 1.6;'
                             >
-                                <p
-                                    style='margin: 0 0 20px 0;'
-                                >你正在进行账号验证，请使用下方的验证码完成操作。为了保障你的账号安全，验证码将在
-                                    <strong>10 分钟</strong>内有效。</p>
+                                <p style='margin: 0 0 20px 0;'>{{t 'paragraph1'}}</p>
 
                                 <!-- Verification Code Box -->
                                 <table
@@ -55,14 +52,14 @@
                                         >
                                             <span
                                                 style='font-size: 32px; font-weight: 700; letter-spacing: 6px; color: #2563eb; font-family: monospace;'
-                                            >{{verificationCode}}</span>
+                                            >{{t verificationCode}}</span>
                                         </td>
                                     </tr>
                                 </table>
 
-                                <p
-                                    style='margin: 0 0 10px 0; font-size: 14px; color: #9ca3af;'
-                                >如果这不是你本人的操作，请忽略此邮件，你的账号将不会受到影响。</p>
+                                <p style='margin: 0 0 10px 0; font-size: 14px; color: #9ca3af;'>{{t
+                                        footer_disclaimer
+                                    }}</p>
                             </td>
                         </tr>
                         <!-- Footer -->
@@ -71,7 +68,7 @@
                                 style='background-color: #f9fafb; padding: 24px 40px; text-align: left; border-top: 1px solid #e5e7eb;'
                             >
                                 <p style='margin: 0; font-size: 13px; color: #9ca3af;'>&copy; 2026
-                                    你的公司. 保留所有权利。</p>
+                                    Stay Sync Hotel. 保留所有权利。</p>
                             </td>
                         </tr>
                     </table>

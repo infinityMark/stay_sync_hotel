@@ -1,4 +1,4 @@
-<html lang='zh-CN'>
+<html lang='en'>
     <head>
         <meta charset='UTF-8' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
@@ -50,32 +50,34 @@
                                 style='font-size: 15px; line-height: 1.8; color: #55514e; text-align: center; padding-bottom: 24px;'
                             >
                                 <p style='margin: 0 0 24px 0;'>
-                                    {{t 'paragraph1'}}
+                                    {{t paragraph1}}
                                 </p>
 
-                                <!-- Minimalist Verification Code Box -->
+                                <!-- Elegant CTA Button -->
                                 <table
                                     role='presentation'
                                     cellspacing='0'
                                     cellpadding='0'
-                                    style='margin: 24px 0; width: 100%;'
+                                    style='margin: 32px auto;'
                                 >
                                     <tr>
                                         <td
                                             align='center'
-                                            style='background-color: #fbfab8; background-color: #fbf9f5; border: 1px solid #eae5dd; border-radius: 4px; padding: 24px;'
+                                            style='border-radius: 2px; background-color: #1a1818;'
                                         >
-                                            <span
-                                                style="font-size: 32px; font-weight: 600; letter-spacing: 8px; color: #1a1818; font-family: 'Courier New', Courier, monospace;"
-                                            >{{verificationCode}}</span>
+                                            <a
+                                                href='{{activationLink}}'
+                                                target='_blank'
+                                                style="font-size: 13px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 2px; border: 1px solid #1a1818; display: inline-block; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;"
+                                            >{{t button}}</a>
                                         </td>
                                     </tr>
                                 </table>
 
                                 <p
-                                    style='margin: 16px 0 0 0; font-size: 13px; color: #8c857b; font-style: italic;'
+                                    style='margin: 24px 0 0 0; font-size: 13px; color: #8c857b; font-style: italic;'
                                 >
-                                    {{t 'footer_disclaimer'}}
+                                    {{t footer_disclaimer}}
                                 </p>
                             </td>
                         </tr>
@@ -109,7 +111,7 @@
                                 <p
                                     style="margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 11px; color: #b0a8a0; letter-spacing: 0.5px;"
                                 >
-                                    &copy; 2026 Stay Sync Hotel. 保留所有权利。
+                                    &copy; 2026 Stay Sync Hotel. All rights reserved.
                                 </p>
                             </td>
                         </tr>

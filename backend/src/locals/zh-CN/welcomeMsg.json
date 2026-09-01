@@ -1,0 +1,9 @@
+{
+    "subject": "欢迎来到{{companyName}}",
+    "greeting": "欢迎，{{username}}。",
+    "thankYou": "感谢您创建 <span style=\"color: #1a1818; font-weight: 600;\">{{companyName}}</span> 的账户。",
+    "activeNotice": "我们非常高兴欢迎您加入我们的社区。您的注册已完成，账户现已完全激活。",
+    "warmRegards": "此致，",
+    "team": "{{companyName}} 团队",
+    "copyright": "© {{year}} {{companyName}}。保留所有权利。"
+}

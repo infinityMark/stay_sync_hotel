@@ -27,9 +27,9 @@ export const registerAccount = async (
 ) => {
     const newConsumer = await prisma.consumer.create({
         data: {
-            firstName: firstName,
-            familyName: familyName,
-            idNum: idNum,
+            first_name: firstName,
+            family_name: familyName,
+            id_number: idNum,
             gender: gender,
             birthday: birthday,
         },

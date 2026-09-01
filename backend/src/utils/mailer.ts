@@ -46,5 +46,3 @@ export const verifyAccessibility = async () => {
         console.error('Verification failed:', err);
     }
 };
-
-verifyAccessibility();

@@ -1,7 +1,7 @@
 // src/services/userService.ts
-import prisma from '../prisma';
-import { hashPassword, comparePassword } from '../utils/encrypt';
-import { transporter, emailTransporter, verifyAccessibility } from '../utils/mailer';
+import prisma from '../prisma.js';
+import { hashPassword, comparePassword } from '../utils/encrypt.js';
+import { transporter, emailTransporter, verifyAccessibility } from '../utils/mailer.js';
 // const nodemailer = require('nodemailer');
 
 // Account relative

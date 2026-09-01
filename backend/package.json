@@ -15,7 +15,7 @@
     "license": "ISC",
     "type": "module",
     "dependencies": {
-        "@prisma/client": "^7.9.1",
+        "@prisma/client": "^7.10.0",
         "bcrypt": "^6.0.0",
         "cors": "^2.8.6",
         "dotenv": "^17.4.2",
@@ -31,7 +31,7 @@
         "@types/node": "^26.4.0",
         "@types/nodemailer": "^8.0.1",
         "nodemon": "^3.1.14",
-        "prisma": "^7.9.1",
+        "prisma": "^7.10.0",
         "ts-node": "^10.9.2",
         "tsx": "^4.23.12",
         "typescript": "^7.0.2",

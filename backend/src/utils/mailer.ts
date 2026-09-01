@@ -2,17 +2,20 @@
 
 import dotenv from 'dotenv';
 import path from 'path';
-dotenv.config({ path: path.join(__dirname, '..', '.env') });
+import { fileURLToPath } from 'url';
 
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+dotenv.config({ path: path.join(__dirname, '..', '..', '.env') });
 
 // Create a transporter using SMTP
 export const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
     port: Number(process.env.EMAIL_PORT),
-    secure: Boolean(process.env.EMAIL_SECURITY), // use STARTTLS (upgrade connection to TLS after connecting)
+    secure: process.env.EMAIL_SECURITY === 'true', // use STARTTLS (upgrade connection to TLS after connecting)
     auth: {
-        user: process.env.EMAIL_USER,
+        user: process.env.EMAIL_ADDRESS,
         pass: process.env.EMAIL_PASS,
     },
 });
@@ -24,7 +27,7 @@ export const emailTransporter = async (
     HTML: string
 ) => {
     const info = await transporter.sendMail({
-        from: process.env.EMAIL_ADDRESS, // sender address
+        from: source, // sender address
         to: destination, // list of recipients
         subject: subject, // subject line
         // text: 'Hello world?', // plain text body
@@ -43,3 +46,5 @@ export const verifyAccessibility = async () => {
         console.error('Verification failed:', err);
     }
 };
+
+verifyAccessibility();

@@ -1,12 +1,113 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model account {
+  accountid    Int      @id @default(autoincrement())
+  consumerid   Int
+  username     String   @unique @db.VarChar(100)
+  password     String   @db.VarChar(255)
+  email        String   @unique @db.VarChar(255)
+  phoneprefix  String   @db.VarChar(16)
+  phone        String   @db.VarChar(20)
+  register_day DateTime @default(dbgenerated("CURRENT_DATE")) @db.Date
+  consumer     consumer @relation(fields: [consumerid], references: [consumerid], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([phoneprefix, phone], map: "unique_account_phone")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model consumer {
+  consumerid          Int                   @id @default(autoincrement())
+  first_name          String                @db.VarChar(100)
+  family_name         String                @db.VarChar(100)
+  id_number           String                @unique @db.VarChar(50)
+  gender              String                @db.VarChar(1)
+  birthday            DateTime              @db.Date
+  account             account[]
+  reservation         reservation[]
+  reservation_service reservation_service[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model reservation {
+  reservationid       Int                   @id @default(autoincrement())
+  consumerid          Int
+  roomid              Int
+  transactionid       Int?
+  arrive_date         DateTime              @db.Date
+  depart_date         DateTime              @db.Date
+  consumer            consumer              @relation(fields: [consumerid], references: [consumerid], onDelete: Cascade, onUpdate: NoAction)
+  room                room                  @relation(fields: [roomid], references: [roomid], onDelete: NoAction, onUpdate: NoAction)
+  transaction         transaction?          @relation(fields: [transactionid], references: [transactionid], onDelete: NoAction, onUpdate: NoAction)
+  reservation_service reservation_service[]
+
+  @@index([consumerid], map: "idx_reservation_consumer")
+  @@index([roomid], map: "idx_reservation_room")
+  @@index([roomid, arrive_date, depart_date], map: "idx_reservation_room_dates")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model reservation_service {
+  id            Int          @id @default(autoincrement())
+  consumerid    Int
+  reservationid Int?
+  serviceid     Int
+  transactionid Int?         @unique
+  quantity      Int          @default(1)
+  price_at_time Decimal      @db.Decimal(8, 2)
+  consumed_date DateTime?    @default(now()) @db.Timestamp(6)
+  notes         String?
+  consumer      consumer     @relation(fields: [consumerid], references: [consumerid], onDelete: Cascade, onUpdate: NoAction)
+  reservation   reservation? @relation(fields: [reservationid], references: [reservationid], onDelete: Cascade, onUpdate: NoAction)
+  service       service      @relation(fields: [serviceid], references: [serviceid], onDelete: NoAction, onUpdate: NoAction)
+  transaction   transaction? @relation(fields: [transactionid], references: [transactionid], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([consumerid], map: "idx_res_service_consumer")
+  @@index([reservationid], map: "idx_res_service_reservation")
+  @@index([serviceid], map: "idx_res_service_service")
+  @@index([transactionid], map: "idx_res_service_transaction")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model room {
+  roomid       Int           @id @default(autoincrement())
+  categoryid   Int
+  room_number  String        @unique @db.VarChar(16)
+  floor        Int           @db.SmallInt
+  statuses     String        @db.VarChar(10)
+  reservation  reservation[]
+  roomcategory roomcategory  @relation(fields: [categoryid], references: [categoryid], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model roomcategory {
+  categoryid Int     @id @default(autoincrement())
+  title      String  @db.VarChar(100)
+  price      Decimal @db.Decimal(7, 2)
+  bed_number Int     @db.SmallInt
+  room       room[]
+}
+
+model service {
+  serviceid           Int                   @id @default(autoincrement())
+  name                String                @db.VarChar(100)
+  description         String?
+  base_price          Decimal               @db.Decimal(8, 2)
+  is_active           Boolean?              @default(true)
+  reservation_service reservation_service[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model transaction {
+  transactionid       Int                  @id @default(autoincrement())
+  amount              Decimal              @db.Decimal(8, 2)
+  transaction_date    DateTime?            @default(dbgenerated("CURRENT_DATE")) @db.Date
+  pay_category        String               @db.VarChar(20)
+  reservation         reservation[]
+  reservation_service reservation_service?
 }

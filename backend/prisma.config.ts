@@ -1,9 +1,16 @@
-// backend/prisma.config.ts
-// / <reference types="node" />
-import 'dotenv/config';
+import { defineConfig } from 'prisma/config';
+import dotenv from 'dotenv';
+import path from 'path';
 
-export default {
+// 加载 backend 根目录下的 .env
+dotenv.config({ path: path.join(__dirname, '.env') });
+
+export default defineConfig({
+    schema: 'prisma/schema.prisma',
+    migrations: {
+        path: 'prisma/migrations',
+    },
     datasource: {
         url: process.env.DATABASE_URL,
     },
-};
+});

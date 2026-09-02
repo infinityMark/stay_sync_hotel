@@ -3,6 +3,8 @@
 A full-stack hotel management system developed as a personal project.  
 It provides core front‑desk functionalities:
 
+## Core features
+
 - Room type and inventory management
 - Customer reservation and check‑in/out
 - Billing and payment recording
@@ -19,14 +21,27 @@ It provides core front‑desk functionalities:
 ## Project Structure
 
 The project is split into two main folders (both in the same repository):
+
 ```
 Hotel_System/
-├── backend/ # Node.js + Express application
-└── frontend/ # React + Vite application
+├── backend/        # Node.js + Express + TypeScript
+│   ├── prisma/     # schema.prisma, migrations
+│   ├── src/        # controllers, routes, services, middlewares, utils, app/server
+│   ├── tests/      # unit & integration tests
+│   └── package.json
+└── frontend/       # React + Vite app
+    └── src/
+        ├── layouts/
+        ├── pages/
+        ├── components/
+        ├── stores/
+        └── api/
 ```
+
 This separation keeps backend and frontend code clean and independently deployable.
 
 ### Frontend Structure
+
 ```
 src/
 ├── layouts/       (Header + Sidebar wrapper)
@@ -37,6 +52,7 @@ src/
 ```
 
 ### Backend Structure
+
 ```
 backend/
 ├── src/                          # Core: All application source code
@@ -83,4 +99,48 @@ backend/
 ├── package.json                  # Project dependencies and script commands
 ├── package-lock.json / yarn.lock # Dependency lock file
 └── README.md                     # Project documentation (architecture, startup commands, API docs)
+```
+
+## Quick start
+
+### Clone the repository
+
+```
+git clone
+```
+
+#### Install deps
+
+```
+npm install (or pnpm install)
+```
+
+### Run dev server
+
+```
+npm run dev
+```
+
+## Contributor notes / best practices
+
+### Always update Prisma artifacts after schema changes:
+
+- Create migration:
+    - `npx prisma migrate dev --name`
+- Generate client:
+    - `npx prisma generate`
+- Commit migrations under
+  **backend/prisma/migrations**
+
+- Use Prisma Studio for quick DB inspection and to help create seed data.
+    - `npx prisma studio`
+
+#### Integration tests:
+
+- Use a separate test database (set via an environment variable, e.g. TEST_DATABASE_URL).
+- In test setup, run migrations and (optionally) seed the test DB:
+
+```
+npx prisma migrate deploy # or npx prisma migrate dev --name init for local dev
+npx prisma db seed
 ```

@@ -3,6 +3,7 @@
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { hashPassword } from './encrypt.js';
 import prisma from './prisma.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -18,12 +19,11 @@ export const registerAccount = async (
     birthday: Date,
 
     // account table
-    consumerid: number,
     username: string,
-    hashedPwd: string,
+    password: string,
+    email: string,
     phonePrefix: string,
-    phone: string,
-    registerDay: Date
+    phone: string
 ) => {
     const newConsumer = await prisma.consumer.create({
         data: {
@@ -35,5 +35,21 @@ export const registerAccount = async (
         },
     });
 
-    // const newAccount = await prisma.console.log(newConsumer);
+    // Obtain new consumer ID
+    const newConsumerID = newConsumer.consumerid;
+
+    const hashPassowrd = await hashPassword(password);
+    const registerDay: string = new Date().toISOString();
+
+    const newAccount = await prisma.account.create({
+        data: {
+            consumerid: newConsumerID,
+            username: username,
+            password: hashPassowrd,
+            email: email,
+            phoneprefix: phonePrefix,
+            phone: phone,
+            register_day: registerDay,
+        },
+    });
 };

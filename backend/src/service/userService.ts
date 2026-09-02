@@ -1,14 +1,11 @@
 // src/services/userService.ts
 import prisma from '../prisma.js';
 import { hashPassword, comparePassword } from '../utils/encrypt.js';
-import { transporter, emailTransporter, verifyAccessibility } from '../utils/mailer.js';
+import { emailTransporter, verifyAccessibility } from '../utils/mailer.js';
+import { registerAccount } from '../utils/registerUser.js';
 // const nodemailer = require('nodemailer');
 
 // Account relative
-export const registerUser = async (email: string, password: string) => {
-    const hashedPwd = await hashPassword(password);
-    return { email, password: hashedPwd };
-};
 
 export const verifyUser = async (email: string, password: string) => {
     const storedPwd = '1'; //retrive pwd from DB
@@ -16,7 +13,44 @@ export const verifyUser = async (email: string, password: string) => {
     return { verify: isPassed };
 };
 
-export const registerAccount = async () => {};
+export const registerUser = async (
+    // consumer table
+    firstName: string,
+    familyName: string,
+    idNum: string,
+    gender: string,
+    birthday: Date,
+
+    // account table
+    username: string,
+    password: string,
+    email: string,
+    phonePrefix: string,
+    phone: string
+) => {
+    try {
+        prisma.$transaction(async () => {
+            await registerAccount(
+                // consumer table
+                firstName,
+                familyName,
+                idNum,
+                gender,
+                birthday,
+
+                // account table
+                username,
+                password,
+                email,
+                phonePrefix,
+                phone
+            );
+        });
+        console.log('Registration successfully.');
+    } catch (error) {
+        console.log('Registration failed:\n' + error + '\n');
+    }
+};
 
 // System function relative
 export const transportEmail = async (
@@ -27,12 +61,6 @@ export const transportEmail = async (
 ) => {
     // varify email service accessibility
     verifyAccessibility();
-    // try {
-    //     await transporter.verify();
-    //     console.log('Server is ready to take our messages');
-    // } catch (err) {
-    //     console.error('Verification failed:', err);
-    // }
 
     // send email actin
     try {

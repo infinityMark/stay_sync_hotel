@@ -3,13 +3,19 @@ import prisma from '../prisma.js';
 import { comparePassword } from '../utils/encrypt.js';
 import { emailTransporter, verifyAccessibility } from '../utils/mailer.js';
 import { registerAccount } from '../utils/registerUser.js';
-import { updatePasswordUtil } from '../utils/updatePassword.js';
+import { updatePasswordUtil, isSamePasswordUtil } from '../utils/updatePassword.js';
+import { retrievePasswordUtil } from '../utils/retrieveData.js';
 
 // Account relative
 export const verifyUser = async (email: string, password: string) => {
-    const storedPwd = '1'; //retrive pwd from DB
-    const isPassed = await comparePassword(storedPwd, password);
-    return { verify: isPassed };
+    try {
+        const storedPwd = await retrievePasswordUtil(email); //retrive pwd from DB
+        const isPassed = await comparePassword(password, storedPwd);
+        return { verify: isPassed };
+    } catch (error) {
+        console.log('Verify user fail:' + error);
+        return { verify: false };
+    }
 };
 
 export const registerUser = async (
@@ -53,9 +59,15 @@ export const registerUser = async (
 
 export const updatePassword = async (email: string, newPassword: string) => {
     try {
+        if (!(await isSamePasswordUtil)) {
+            return { isPassword: false, desc: 'same password' };
+        }
+
         prisma.$transaction(async () => {
             updatePasswordUtil(email, newPassword);
         });
+
+        return { isPassword: true };
     } catch (error) {
         console.log('Update password failed:\n' + error);
     }

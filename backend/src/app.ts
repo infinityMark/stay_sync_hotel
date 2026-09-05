@@ -2,7 +2,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
-import routes from './routes/index';
+import routes from './routes/index.js';
 
 dotenv.config({ path: path.join(__dirname, '..', '.env') });
 

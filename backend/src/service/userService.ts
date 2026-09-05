@@ -1,12 +1,11 @@
 // src/services/userService.ts
 import prisma from '../prisma.js';
-import { hashPassword, comparePassword } from '../utils/encrypt.js';
+import { comparePassword } from '../utils/encrypt.js';
 import { emailTransporter, verifyAccessibility } from '../utils/mailer.js';
 import { registerAccount } from '../utils/registerUser.js';
-// const nodemailer = require('nodemailer');
+import { updatePasswordUtil } from '../utils/updatePassword.js';
 
 // Account relative
-
 export const verifyUser = async (email: string, password: string) => {
     const storedPwd = '1'; //retrive pwd from DB
     const isPassed = await comparePassword(storedPwd, password);
@@ -52,6 +51,16 @@ export const registerUser = async (
     }
 };
 
+export const updatePassword = async (email: string, newPassword: string) => {
+    try {
+        prisma.$transaction(async () => {
+            updatePasswordUtil(email, newPassword);
+        });
+    } catch (error) {
+        console.log('Update password failed:\n' + error);
+    }
+};
+
 // System function relative
 export const transportEmail = async (
     source: string,
@@ -67,8 +76,6 @@ export const transportEmail = async (
         const result = await emailTransporter(source, destination, subject, HTML);
 
         console.log('Message sent: %s', result.messageId);
-        // Preview URL is only available when using an Ethereal test account
-        // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
     } catch (err) {
         console.error('Error while sending mail:', err);
     }

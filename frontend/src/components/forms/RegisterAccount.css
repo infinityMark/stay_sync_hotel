@@ -1,0 +1,357 @@
+/* ═══════════════════════════════════════════
+   RegisterAccount — light floating-label form
+   Inputs are the shared `Input1` component; this
+   sheet styles the surrounding card (header,
+   select, date, checkbox, submit, errors) to match.
+   ═══════════════════════════════════════════ */
+
+.register,
+.register * {
+    box-sizing: border-box;
+}
+
+.register {
+    --ra-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --ra-serif: Georgia, 'Times New Roman', Times, serif;
+    --ra-ink: #111111;
+    --ra-muted: #6f6f6f;
+    --ra-hairline: #e8e8e8;
+    --ra-border: #9e9e9e;
+    --ra-hover: #f4f4f4;
+    --ra-accent: #1a73e8;
+    --ra-error: #b42318;
+
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 72px 24px;
+    background: #fafafa;
+    font-family: var(--ra-sans);
+    color: var(--ra-ink);
+}
+
+/* ── Card ── */
+.register__card {
+    width: 100%;
+    max-width: 440px;
+    background: #ffffff;
+    border: 1px solid var(--ra-hairline);
+    border-radius: 1rem;
+    padding: 44px 44px 36px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* ── Header ── */
+.register__header {
+    margin-bottom: 32px;
+}
+
+.register__title {
+    margin: 0;
+    font-family: var(--ra-serif);
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+    color: #111111;
+}
+
+.register__subtitle {
+    margin: 12px 0 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ra-muted);
+}
+
+/* ── Form ── */
+.register__form {
+    display: grid;
+    gap: 22px;
+}
+
+.register__field {
+    display: grid;
+    gap: 8px;
+}
+
+.register__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.register__row--phone {
+    grid-template-columns: 112px 1fr;
+}
+
+/* Label-above pattern (select + date, which aren't Input1) */
+.register__label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #111111;
+}
+
+/* ── Plain date input (birthday) ── */
+.register__input {
+    width: 100%;
+    height: 50px;
+    padding: 0 14px;
+    border: 1.5px solid var(--ra-border);
+    border-radius: 1rem;
+    background: #ffffff;
+    color: var(--ra-ink);
+    font-family: inherit;
+    font-size: 15px;
+    transition: border-color 0.15s ease;
+}
+
+.register__input:focus {
+    outline: none;
+    border-color: var(--ra-accent);
+}
+
+.register__input[aria-invalid='true'] {
+    border-color: var(--ra-error);
+}
+
+/* ── Select (gender) ── */
+.register__select {
+    width: 100%;
+    height: 50px;
+    padding: 0 40px 0 14px;
+    border: 1.5px solid var(--ra-border);
+    border-radius: 1rem;
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236f6f6f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 12px;
+    color: var(--ra-ink);
+    font-family: inherit;
+    font-size: 15px;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+}
+
+.register__select--placeholder {
+    color: #9a9a9a;
+}
+
+.register__select:focus {
+    outline: none;
+    border-color: var(--ra-accent);
+}
+
+.register__select[aria-invalid='true'] {
+    border-color: var(--ra-error);
+}
+
+/* ── Show / hide toggle (suffix inside Input1) ── */
+.register__toggle {
+    padding: 6px 10px;
+    border: none;
+    background: none;
+    color: #6f6f6f;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    transition:
+        color 0.15s ease,
+        background 0.15s ease;
+}
+
+.register__toggle:hover {
+    color: #111111;
+    background: #f4f4f4;
+}
+
+/* ── Password strength meter ── */
+.register__strength {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.register__strength-bars {
+    display: flex;
+    gap: 4px;
+    flex: 1;
+}
+
+.register__strength-bar {
+    flex: 1;
+    height: 4px;
+    border-radius: 999px;
+    background: #e5e5e5;
+}
+
+.register__strength-bar--filled {
+    background: var(--ra-accent);
+}
+
+.register__strength-label {
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    color: var(--ra-muted);
+    white-space: nowrap;
+}
+
+/* ── Terms consent ── */
+.register__terms {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.register__checkbox {
+    flex: none;
+    width: 16px;
+    height: 16px;
+    margin: 2px 0 0;
+    accent-color: var(--ra-accent);
+    cursor: pointer;
+}
+
+.register__terms-text {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ra-muted);
+}
+
+.register__terms-text a {
+    color: var(--ra-accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.register__terms-text a:hover {
+    text-decoration-thickness: 2px;
+}
+
+/* ── Errors ── */
+.register__error {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--ra-error);
+}
+
+/* ── Submit ── */
+.register__submit {
+    width: 100%;
+    height: 50px;
+    margin-top: 4px;
+    border: none;
+    border-radius: 1rem;
+    background: var(--ra-accent);
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background 0.15s ease,
+        transform 0.1s ease;
+}
+
+.register__submit:hover {
+    background: #1666c4;
+}
+
+.register__submit:active {
+    transform: scale(0.99);
+}
+
+/* ── Sign-in footer ── */
+.register__signin {
+    margin: 24px 0 0;
+    text-align: center;
+    font-size: 14px;
+    color: var(--ra-muted);
+}
+
+.register__signin-link {
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--ra-accent);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.register__signin-link:hover {
+    text-decoration-thickness: 2px;
+}
+
+/* ── Screen-reader only utility ── */
+.register__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ── Focus & reduced motion ── */
+.register a:focus-visible,
+.register button:focus-visible,
+.register input:focus-visible,
+.register select:focus-visible {
+    outline: 2px solid var(--ra-accent);
+    outline-offset: 3px;
+}
+
+.register__input:focus-visible,
+.register__select:focus-visible {
+    outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .register__input,
+    .register__select,
+    .register__toggle,
+    .register__submit,
+    .register__signin-link {
+        transition: none;
+    }
+    .register__submit:active {
+        transform: none;
+    }
+}
+
+/* ═══════════════════════════════════════════
+   Responsive — Phone (< 480px)
+   ═══════════════════════════════════════════ */
+
+@media (max-width: 479px) {
+    .register {
+        padding: 40px 16px;
+    }
+
+    .register__card {
+        padding: 32px 24px 28px;
+    }
+
+    .register__title {
+        font-size: 24px;
+    }
+
+    .register__row {
+        grid-template-columns: 1fr;
+    }
+}

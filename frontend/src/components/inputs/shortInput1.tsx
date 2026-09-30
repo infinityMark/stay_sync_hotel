@@ -1,7 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 
-const Input = ({ label = 'First Name' }) => {
+const Input1 = ({ label = 'First Name' }) => {
     return (
         <StyledWrapper>
             <div className="input-group">
@@ -51,4 +50,4 @@ const StyledWrapper = styled.div`
     }
 `;
 
-export default Input;
+export default Input1;

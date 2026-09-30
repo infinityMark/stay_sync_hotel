@@ -14,8 +14,10 @@ const NavBarInit = () => {
             ]}
             languageLabel="EN"
             onLanguageClick={() => {}}
-            ctaLabel="Reserve"
-            onCtaClick={() => {}}
+            ctaLabel="Login"
+            onCtaClick={() => {
+                href: '../pages/client/login.tsx';
+            }}
         />
     );
 };

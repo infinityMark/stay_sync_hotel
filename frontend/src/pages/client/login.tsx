@@ -2,12 +2,13 @@
 import NavBarInit from '../../layouts/ClientHeader';
 import FooterInit from '../../layouts/ClientFooter';
 // interface
+import { Login } from '../../components/forms/login/Login';
 
 const login = () => {
     return (
         <div>
             <NavBarInit />
-            <LoginAccount />
+            <Login />
             <FooterInit />
         </div>
     );

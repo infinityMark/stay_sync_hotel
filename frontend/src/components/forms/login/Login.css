@@ -1,0 +1,198 @@
+/* ═══════════════════════════════════════════
+   Login — light floating-label sign-in form
+   Uses EmailInput + PasswordInput; this sheet
+   styles the card, links, checkbox and submit.
+   ═══════════════════════════════════════════ */
+
+.login,
+.login * {
+    box-sizing: border-box;
+}
+
+.login {
+    --login-sans:
+        -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --login-serif: Georgia, 'Times New Roman', Times, serif;
+    --login-ink: #111111;
+    --login-muted: #6f6f6f;
+    --login-hairline: #e8e8e8;
+    --login-accent: #1a73e8;
+    --login-error: #b42318;
+
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 72px 24px;
+    background: #fafafa;
+    font-family: var(--login-sans);
+    color: var(--login-ink);
+}
+
+/* ── Card ── */
+.login__card {
+    width: 100%;
+    max-width: 400px;
+    background: #ffffff;
+    border: 1px solid var(--login-hairline);
+    border-radius: 1rem;
+    padding: 44px 40px 36px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* ── Header ── */
+.login__header {
+    margin-bottom: 32px;
+}
+
+.login__title {
+    margin: 0;
+    font-family: var(--login-serif);
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+    color: var(--login-ink);
+}
+
+.login__subtitle {
+    margin: 12px 0 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--login-muted);
+}
+
+/* ── Form ── */
+.login__form {
+    display: grid;
+    gap: 22px;
+}
+
+.login__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+/* ── Remember me ── */
+.login__remember {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--login-muted);
+    cursor: pointer;
+}
+
+.login__checkbox {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    accent-color: var(--login-accent);
+    cursor: pointer;
+}
+
+/* ── Forgot password ── */
+.login__forgot {
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--login-accent);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.login__forgot:hover {
+    text-decoration-thickness: 2px;
+}
+
+/* ── Submit ── */
+.login__submit {
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 1rem;
+    background: var(--login-accent);
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background 0.15s ease,
+        transform 0.1s ease;
+}
+
+.login__submit:hover {
+    background: #1666c4;
+}
+
+.login__submit:active {
+    transform: scale(0.99);
+}
+
+/* ── Sign-up footer ── */
+.login__signup {
+    margin: 24px 0 0;
+    text-align: center;
+    font-size: 14px;
+    color: var(--login-muted);
+}
+
+.login__signup-link {
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--login-accent);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.login__signup-link:hover {
+    text-decoration-thickness: 2px;
+}
+
+/* ── Focus & reduced motion ── */
+.login a:focus-visible,
+.login button:focus-visible,
+.login input:focus-visible {
+    outline: 2px solid var(--login-accent);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .login__submit,
+    .login__forgot,
+    .login__signup-link {
+        transition: none;
+    }
+    .login__submit:active {
+        transform: none;
+    }
+}
+
+/* ═══════════════════════════════════════════
+   Responsive — Phone (< 480px)
+   ═══════════════════════════════════════════ */
+
+@media (max-width: 479px) {
+    .login {
+        padding: 40px 16px;
+    }
+
+    .login__card {
+        padding: 32px 24px 28px;
+    }
+
+    .login__title {
+        font-size: 24px;
+    }
+}

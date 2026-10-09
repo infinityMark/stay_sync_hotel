@@ -1,6 +1,6 @@
 // component & layout
-import NavBarInit from '../../layouts/ClientHeader';
-import FooterInit from '../../layouts/ClientFooter';
+import NavBarInit from '../../layouts/Client/ClientHeader';
+import FooterInit from '../../layouts/Client/ClientFooter';
 import ImgExhibition from '../../components/photoExhibition/exhibition';
 // interface
 import type { ExhibitionSlide } from '../../components/photoExhibition/exhibition';

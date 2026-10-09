@@ -1,5 +1,5 @@
-import { Footer } from '../components/footer/Footer';
-import type { FooterLinkColumn, SocialLink } from '../components/footer/Footer';
+import { Footer } from '../../components/footer/Footer';
+import type { FooterLinkColumn, SocialLink } from '../../components/footer/Footer';
 
 const footerLinkColum: FooterLinkColumn[] = [
     {

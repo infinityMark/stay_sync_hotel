@@ -1,0 +1,204 @@
+/* ═══════════════════════════════════════════
+   VerifyEmail — email + one-time code page
+   Uses EmailInput; the 6-box code always sits
+   directly under the email.
+   ═══════════════════════════════════════════ */
+
+.verify,
+.verify * {
+  box-sizing: border-box;
+}
+
+.verify {
+  --verify-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --verify-serif: Georgia, "Times New Roman", Times, serif;
+  --verify-ink: #111111;
+  --verify-muted: #6f6f6f;
+  --verify-hairline: #e8e8e8;
+  --verify-border: #9e9e9e;
+  --verify-accent: #1a73e8;
+  --verify-error: #b42318;
+
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 72px 24px;
+  background: #fafafa;
+  font-family: var(--verify-sans);
+  color: var(--verify-ink);
+}
+
+/* ── Card ── */
+.verify__card {
+  width: 100%;
+  max-width: 400px;
+  background: #ffffff;
+  border: 1px solid var(--verify-hairline);
+  border-radius: 1rem;
+  padding: 44px 40px 36px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* ── Header ── */
+.verify__header {
+  margin-bottom: 32px;
+}
+
+.verify__title {
+  margin: 0;
+  font-family: var(--verify-serif);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  color: var(--verify-ink);
+}
+
+.verify__subtitle {
+  margin: 12px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--verify-muted);
+}
+
+/* ── Form ── */
+.verify__form {
+  display: grid;
+  gap: 20px;
+}
+
+/* ── Send code (secondary) ── */
+.verify__send {
+  width: 100%;
+  height: 46px;
+  border: 1.5px solid var(--verify-accent);
+  border-radius: 1rem;
+  background: none;
+  color: var(--verify-accent);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.verify__send:hover {
+  background: rgba(26, 115, 232, 0.08);
+}
+
+/* ── Code block ── */
+.verify__code-block {
+  display: grid;
+  gap: 10px;
+}
+
+.verify__hint {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--verify-muted);
+}
+
+.verify__code {
+  display: flex;
+  gap: 8px;
+}
+
+.verify__code-box {
+  flex: 1;
+  min-width: 0;
+  height: 52px;
+  padding: 0;
+  border: 1.5px solid var(--verify-border);
+  border-radius: 0.75rem;
+  background: #ffffff;
+  color: var(--verify-ink);
+  font-family: inherit;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.verify__code-box:focus {
+  outline: none;
+  border-color: var(--verify-accent);
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.12);
+}
+
+.verify__code-box--error {
+  border-color: var(--verify-error);
+}
+
+.verify__error {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--verify-error);
+}
+
+/* ── Primary submit ── */
+.verify__primary {
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 1rem;
+  background: var(--verify-accent);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.verify__primary:hover {
+  background: #1666c4;
+}
+
+.verify__primary:active {
+  transform: scale(0.99);
+}
+
+/* ── Focus & reduced motion ── */
+.verify button:focus-visible {
+  outline: 2px solid var(--verify-accent);
+  outline-offset: 3px;
+}
+
+.verify__code-box:focus-visible {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .verify__send,
+  .verify__code-box,
+  .verify__primary {
+    transition: none;
+  }
+  .verify__primary:active {
+    transform: none;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   Responsive — Phone (< 480px)
+   ═══════════════════════════════════════════ */
+
+@media (max-width: 479px) {
+  .verify {
+    padding: 40px 16px;
+  }
+
+  .verify__card {
+    padding: 32px 24px 28px;
+  }
+
+  .verify__title {
+    font-size: 24px;
+  }
+
+  .verify__code {
+    gap: 6px;
+  }
+}

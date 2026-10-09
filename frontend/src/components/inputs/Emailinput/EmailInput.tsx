@@ -20,7 +20,7 @@ export interface EmailInputProps {
     /** External error message; when present it overrides the built-in check. */
     error?: string;
     /** Ref forwarded to the underlying <input>. */
-    inputRef?: RefObject<HTMLInputElement>;
+    inputRef?: React.RefObject<HTMLInputElement | null>;
 }
 
 export function EmailInput({

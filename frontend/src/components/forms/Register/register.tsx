@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import type { FormEvent, ReactNode, RefObject } from 'react';
-import { Input1 } from '../Input1';
+import Input1 from '../../inputs/Input1';
 import './RegisterAccount.css';
 
 export interface RegisterAccountValues {
@@ -210,19 +210,19 @@ export function RegisterAccount({
     const [showConfirm, setShowConfirm] = useState(false);
     const [announcement, setAnnouncement] = useState('');
 
-    const firstNameRef = useRef<HTMLInputElement>(null);
-    const familyNameRef = useRef<HTMLInputElement>(null);
-    const usernameRef = useRef<HTMLInputElement>(null);
-    const emailRef = useRef<HTMLInputElement>(null);
-    const genderRef = useRef<HTMLSelectElement>(null);
-    const birthdayRef = useRef<HTMLInputElement>(null);
-    const phonePrefixRef = useRef<HTMLInputElement>(null);
-    const phoneNumberRef = useRef<HTMLInputElement>(null);
-    const passwordRef = useRef<HTMLInputElement>(null);
-    const confirmPasswordRef = useRef<HTMLInputElement>(null);
-    const termsRef = useRef<HTMLInputElement>(null);
+    const firstNameRef = useRef<HTMLInputElement | null>(null);
+    const familyNameRef = useRef<HTMLInputElement | null>(null);
+    const usernameRef = useRef<HTMLInputElement | null>(null);
+    const emailRef = useRef<HTMLInputElement | null>(null);
+    const genderRef = useRef<HTMLSelectElement | null>(null);
+    const birthdayRef = useRef<HTMLInputElement | null>(null);
+    const phonePrefixRef = useRef<HTMLInputElement | null>(null);
+    const phoneNumberRef = useRef<HTMLInputElement | null>(null);
+    const passwordRef = useRef<HTMLInputElement | null>(null);
+    const confirmPasswordRef = useRef<HTMLInputElement | null>(null);
+    const termsRef = useRef<HTMLInputElement | null>(null);
 
-    const fieldRefs: Record<FieldKey, RefObject<HTMLElement>> = {
+    const fieldRefs: Record<FieldKey, RefObject<HTMLElement | null>> = {
         firstName: firstNameRef,
         familyName: familyNameRef,
         username: usernameRef,

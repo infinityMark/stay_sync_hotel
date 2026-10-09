@@ -39,7 +39,7 @@ export interface PasswordInputProps {
     /** Error message; when present, the field renders in its alert (red) state. */
     error?: string;
     /** Ref forwarded to the underlying <input>. */
-    inputRef?: RefObject<HTMLInputElement>;
+    inputRef?: React.RefObject<HTMLInputElement | null>;
     /** Show the strength meter while the user types. Default `true`. */
     showStrength?: boolean;
     autoComplete?: string;

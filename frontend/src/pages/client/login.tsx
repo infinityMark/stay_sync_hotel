@@ -13,7 +13,7 @@ const login = () => {
         title: 'Welcome back',
         subtitle: 'Please enter your details to sign in',
         onSubmit: () => {},
-        onForgotPassword: () => navigate('/forgot_password'),
+        onForgotPassword: () => navigate('/VerifyEmailPage'),
         onSignUp: () => navigate('/signup'),
         submitLabel: 'Sign in',
         forgotPasswordLabel: 'Forgot password?',
